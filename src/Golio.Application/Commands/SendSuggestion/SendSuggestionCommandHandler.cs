@@ -50,7 +50,8 @@ namespace Golio.Application.Commands.CreateProduct.SendSuggestion
                 AutorName = userName,
                 AutorEmail = userEmail,
                 PriceId = price.Id,
-                Value = request.NewPrice
+                Value = request.NewPrice,
+                IsValid = request.IsValid
             };
 
             await _messageBusService.SendMessageQueueAsync(suggestionDTO);

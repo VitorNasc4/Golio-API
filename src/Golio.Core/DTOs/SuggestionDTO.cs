@@ -11,5 +11,6 @@ namespace Golio.Core.DTOs
         public string AutorName { get; set; }
         public string AutorEmail { get; set; }
         public int PriceId { get; set; }
+        public bool IsValid { get; set; }
     }
 }
