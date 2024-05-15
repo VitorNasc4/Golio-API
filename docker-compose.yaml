@@ -1,0 +1,59 @@
+version: '3.5'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./src/Golio.API/Dockerfile
+    image: api:dev
+    container_name: api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "5000:5000"
+
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - Golio-db:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d Golio" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  redis:
+    image: redis
+    container_name: redis
+    environment:
+      - REDIS_PASSWORD=123
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "redis-cli",
+          "-h",
+          "localhost",
+          "-a",
+          "teste",
+          "ping"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  Golio-db:

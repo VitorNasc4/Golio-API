@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FA9B1FA-2FFD-4C49-8573-817D17A9D60D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golio.API", "src\Golio.API\Golio.API.csproj", "{3D113E9F-0818-40A1-A2EA-45666810F844}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golio.Application", "src\Golio.Application\Golio.Application.csproj", "{407C5976-6C42-4A64-9385-6EE3F328253F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golio.Core", "src\Golio.Core\Golio.Core.csproj", "{BE6737D8-CBF6-461F-83F7-BE8FD15A2C0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golio.Infrastructure", "src\Golio.Infrastructure\Golio.Infrastructure.csproj", "{2B6EEBC8-2B38-494B-BAB4-43B22B5A6F48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golio.Messaging", "src\Golio.Messaging\Golio.Messaging.csproj", "{A1BE79F3-0291-475C-A7C0-3E80683A23E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Golio.Test", "src\Golio.Test\Golio.Test.csproj", "{E622AF4B-9BD6-4735-98A2-FE4330E1E407}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D113E9F-0818-40A1-A2EA-45666810F844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D113E9F-0818-40A1-A2EA-45666810F844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D113E9F-0818-40A1-A2EA-45666810F844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D113E9F-0818-40A1-A2EA-45666810F844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{407C5976-6C42-4A64-9385-6EE3F328253F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{407C5976-6C42-4A64-9385-6EE3F328253F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{407C5976-6C42-4A64-9385-6EE3F328253F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{407C5976-6C42-4A64-9385-6EE3F328253F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE6737D8-CBF6-461F-83F7-BE8FD15A2C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE6737D8-CBF6-461F-83F7-BE8FD15A2C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE6737D8-CBF6-461F-83F7-BE8FD15A2C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE6737D8-CBF6-461F-83F7-BE8FD15A2C0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B6EEBC8-2B38-494B-BAB4-43B22B5A6F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6EEBC8-2B38-494B-BAB4-43B22B5A6F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6EEBC8-2B38-494B-BAB4-43B22B5A6F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6EEBC8-2B38-494B-BAB4-43B22B5A6F48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1BE79F3-0291-475C-A7C0-3E80683A23E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1BE79F3-0291-475C-A7C0-3E80683A23E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1BE79F3-0291-475C-A7C0-3E80683A23E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1BE79F3-0291-475C-A7C0-3E80683A23E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E622AF4B-9BD6-4735-98A2-FE4330E1E407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E622AF4B-9BD6-4735-98A2-FE4330E1E407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E622AF4B-9BD6-4735-98A2-FE4330E1E407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E622AF4B-9BD6-4735-98A2-FE4330E1E407}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3D113E9F-0818-40A1-A2EA-45666810F844} = {7FA9B1FA-2FFD-4C49-8573-817D17A9D60D}
+		{407C5976-6C42-4A64-9385-6EE3F328253F} = {7FA9B1FA-2FFD-4C49-8573-817D17A9D60D}
+		{BE6737D8-CBF6-461F-83F7-BE8FD15A2C0D} = {7FA9B1FA-2FFD-4C49-8573-817D17A9D60D}
+		{2B6EEBC8-2B38-494B-BAB4-43B22B5A6F48} = {7FA9B1FA-2FFD-4C49-8573-817D17A9D60D}
+		{A1BE79F3-0291-475C-A7C0-3E80683A23E1} = {7FA9B1FA-2FFD-4C49-8573-817D17A9D60D}
+		{E622AF4B-9BD6-4735-98A2-FE4330E1E407} = {7FA9B1FA-2FFD-4C49-8573-817D17A9D60D}
+	EndGlobalSection
+EndGlobal
