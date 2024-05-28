@@ -10,6 +10,7 @@ namespace Golio.Application.Commands.CreateProduct.CreateUser
 {
     public class CreateSuggestionCommand : IRequest<Unit>
     {
+        public int Id { get; set; }
         public double Value { get; set; }
         public string AutorName { get; set; }
         public string AutorEmail { get; set; }

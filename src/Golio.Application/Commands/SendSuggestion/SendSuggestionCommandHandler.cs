@@ -30,15 +30,26 @@ namespace Golio.Application.Commands.CreateProduct.SendSuggestion
         }
         public async Task<Unit> Handle(SendSuggestionCommand request, CancellationToken cancellationToken)
         {
+            // Validando preço
             var price = await _priceRepository.GetPriceByIdAsync(request.PriceId);
             if (price == null)
             {
-                Console.WriteLine("Preço não encontrado");
+                Console.WriteLine($"Price not found with ID {request.PriceId}");
                 return Unit.Value;
             }
 
+            //Validando sugestão
+            foreach (var suggestion in price.Suggestions)
+            {
+                if (suggestion.Value == request.NewPrice)
+                {
+                    Console.WriteLine($"Suggestion already exists for the PriceId {request.PriceId} whith value {request.NewPrice}");
+                    return Unit.Value;
+                }
+            }
+
             var userEmail = _httpContextAccessor.HttpContext?.User.Identities.FirstOrDefault().Claims.Where(c => c.Type == "userName").FirstOrDefault().Value;
-            var userName = "Usuario Desconhecido";
+            var userName = "Unknown User";
             if (userEmail is not null)
             {
                 var user = await _userRepository.GetUserByEmailAsync(userEmail);
@@ -50,8 +61,7 @@ namespace Golio.Application.Commands.CreateProduct.SendSuggestion
                 AutorName = userName,
                 AutorEmail = userEmail,
                 PriceId = price.Id,
-                Value = request.NewPrice,
-                IsValid = request.IsValid
+                Value = request.NewPrice
             };
 
             await _messageBusService.SendMessageQueueAsync(suggestionDTO);

@@ -9,6 +9,7 @@ namespace Golio.Core.Repositories
     public interface ISuggestionRepository
     {
         Task AddSuggestionAsync(Suggestion suggestion);
+        Task DeleteSuggestionAsync(int suggestionsId);
         Task<Suggestion> GetSuggestionByIdAsync(int suggestionsId);
         Task<bool> CheckSuggestionExistsAsync(Suggestion suggestion);
         Task SaveChangesAsync();

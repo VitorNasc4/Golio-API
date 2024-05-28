@@ -13,11 +13,13 @@ namespace Golio.Infrastructure.MessageBusService
     {
         private readonly IConfiguration _configuration;
         private readonly string suggestionQueueName;
+        private readonly string suggestionVoteQueueName;
         private readonly string connectionString;
         public MessageBusService(IConfiguration configuration)
         {
             _configuration = configuration;
             suggestionQueueName = _configuration["ServiceBus:SuggestionQueueName"];
+            suggestionVoteQueueName = _configuration["ServiceBus:VotesQueueName"];
             connectionString = _configuration["ServiceBus:ConnectioString"];
         }
         public async Task SendMessageQueueAsync<T>(T message)
@@ -28,13 +30,16 @@ namespace Golio.Infrastructure.MessageBusService
                 case Type when typeof(T) == typeof(SuggestionDTO):
                     queueName = suggestionQueueName;
                     break;
+                case Type when typeof(T) == typeof(SuggestionVoteMessage):
+                    queueName = suggestionVoteQueueName;
+                    break;
                 default:
                     break;
             }
 
             if (string.IsNullOrEmpty(queueName))
             {
-                Console.WriteLine("Erro ao obter nome da fila");
+                Console.WriteLine("Error retrieving queue name");
                 return;
             }
 
@@ -46,11 +51,11 @@ namespace Golio.Infrastructure.MessageBusService
 
                 await client.SendAsync(serielizedMessage);
                 await client.CloseAsync();
-                Console.WriteLine($"Mensagem enviada com sucesso para a fila {queueName}");
+                Console.WriteLine($"Message successfully sent to the queue {queueName}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao enviar mensagem para a fila {queueName}: {ex.Message}");
+                Console.WriteLine($"Error sending message to the queue {queueName}: {ex.Message}");
             }
         }
     }

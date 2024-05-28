@@ -66,6 +66,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHostedService<SuggestionQueueConsumer>();
+builder.Services.AddHostedService<VoteQueueConsumer>();
 builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilters)));
 
 // Fluent Validator

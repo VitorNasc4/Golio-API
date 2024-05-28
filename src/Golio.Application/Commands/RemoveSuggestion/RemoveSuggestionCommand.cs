@@ -7,9 +7,8 @@ using MediatR;
 
 namespace Golio.Application.Commands.CreateProduct.SendSuggestion
 {
-    public class SendSuggestionCommand : IRequest<Unit>
+    public class RemoveSuggestionCommand : IRequest<Unit>
     {
-        public int PriceId { get; set; }
-        public double NewPrice { get; set; }
+        public int SuggestionId { get; set; }
     }
 }

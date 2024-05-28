@@ -11,6 +11,6 @@ namespace Golio.Application.Commands.CreateProduct.CreateUser
     public class UpdatePriceCommand : IRequest<Unit>
     {
         public int PriceId { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Golio.Messaging.Consumers
         public SuggestionQueueConsumer(IConfiguration configuration, ISuggestionRepository suggestionRepository, ICacheService cacheService)
         {
             _configuration = configuration;
-            suggestionQueueName = _configuration["ServiceBus:SuggestionQueueName"];
+            suggestionQueueName = _configuration["ServiceBus:ReceivedSuggestionQueueName"];
             connectionString = _configuration["ServiceBus:ConnectioString"];
             queueClient = new QueueClient(connectionString, suggestionQueueName);
 
@@ -32,14 +32,14 @@ namespace Golio.Messaging.Consumers
         }
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine("Iniciando Consumer da fila de Sugestões");
+            Console.WriteLine("Starting Consumer from the suggestions queue");
             ProcessMessageHandler();
             return Task.CompletedTask;
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine("Finalizando Consumer da fila de Sugestões");
+            Console.WriteLine("Finishing Consumer from the suggestions queue");
             await queueClient.CloseAsync();
             await Task.CompletedTask;
         }
@@ -57,12 +57,13 @@ namespace Golio.Messaging.Consumers
 
         private async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
-            Console.WriteLine($"Processando mensagem: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
+            Console.WriteLine($"Processing message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
 
             var suggestionDTO = JsonSerializer.Deserialize<SuggestionDTO>(message.Body);
 
             var createSuggestionCommand = new CreateSuggestionCommand()
             {
+                Id = suggestionDTO!.Id,
                 AutorName = suggestionDTO!.AutorName,
                 AutorEmail = suggestionDTO!.AutorEmail,
                 PriceId = suggestionDTO.PriceId,
@@ -76,7 +77,7 @@ namespace Golio.Messaging.Consumers
 
         private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
         {
-            Console.WriteLine($"Erro ao processar evento: {exceptionReceivedEventArgs.Exception}.");
+            Console.WriteLine($"Error processing event: {exceptionReceivedEventArgs.Exception}.");
             var context = exceptionReceivedEventArgs.ExceptionReceivedContext;
             Console.WriteLine($"Endpoint: {context.Endpoint}");
             Console.WriteLine($"Entity Path: {context.EntityPath}");

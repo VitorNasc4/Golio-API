@@ -23,6 +23,7 @@ namespace Golio.Application.Commands.CreateProduct.CreateUser
         {
             var suggestion = new Suggestion()
             {
+                Id = request!.Id,
                 AutorName = request!.AutorName,
                 AutorEmail = request!.AutorEmail,
                 PriceId = request.PriceId,
@@ -32,7 +33,7 @@ namespace Golio.Application.Commands.CreateProduct.CreateUser
 
             if (suggestionAlreadyExists)
             {
-                Console.WriteLine("Sugestão já existente");
+                Console.WriteLine($"Suggestion already exists with ID {request.Id}");
                 return Unit.Value;
             }
 
