@@ -1,16 +1,7 @@
-﻿using Golio.API.Models;
-using Golio.Application.Commands.CreateProduct.CreateUser;
-using Golio.Application.Commands.CreateProduct.SendSuggestion;
-using Golio.Application.Commands.LoginUser;
-using Golio.Application.Commands.UserCommands.CreateUser;
-using Golio.Application.Queries.GetProductById;
-using Golio.Application.Queries.GetProducts;
-using Golio.Application.Queries.GetUser;
-using Golio.Application.ViewModels;
+﻿using Golio.Application.Commands.CreateProduct.SendSuggestion;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Golio.API.Controllers
@@ -31,6 +22,17 @@ namespace Golio.API.Controllers
         public async Task<ActionResult> SendSuggestion(int priceId, [FromBody] SendSuggestionCommand command)
         {
             command.PriceId = priceId;
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        // api/suggestions/votes/1
+        [HttpPost("votes/{suggestionId}")]
+        [Authorize(Roles = "user, admin")]
+        public async Task<ActionResult> SendSuggestionVote(int suggestionId, [FromBody] SendSuggestionVoteCommand command)
+        {
+            command.SuggestionId = suggestionId;
             await _mediator.Send(command);
 
             return NoContent();
