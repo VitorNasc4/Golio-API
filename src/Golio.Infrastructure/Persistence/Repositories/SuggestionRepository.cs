@@ -38,7 +38,6 @@ namespace Golio.Infrastructure.Persistence.Repositories
                 }
 
                 _dbContext.Entry(suggestion).State = EntityState.Added;
-                // price.Suggestions.Add(suggestion);
 
                 await _dbContext.SaveChangesAsync();
             }

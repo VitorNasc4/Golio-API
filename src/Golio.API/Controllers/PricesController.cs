@@ -54,16 +54,5 @@ namespace Golio.API.Controllers
             return CreatedAtAction(nameof(GetPriceById), new { id = id }, responseBody);
         }
 
-        // api/prices/1
-        // [HttpPut("{priceId}")]
-        // [Authorize(Roles = "user, admin")]
-        // public async Task<ActionResult> SendSuggestion(int priceId, [FromBody] SendSuggestionCommand command)
-        // {
-        //     command.PriceId = priceId;
-        //     await _mediator.Send(command);
-
-        //     return NoContent();
-        // }
-
     }
 }

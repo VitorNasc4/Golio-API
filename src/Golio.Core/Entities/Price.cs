@@ -9,7 +9,7 @@ namespace Golio.Core.Entities
         public double Value { get; set; }
         public int ProductId { get; set; }
         public int StoreId { get; set; }
-        public List<Suggestion> Suggestions { get; set; } //= new List<Suggestion>();
+        public List<Suggestion> Suggestions { get; set; }
 
         public void Update(double newPrice)
         {
