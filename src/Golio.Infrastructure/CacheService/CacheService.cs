@@ -28,16 +28,16 @@ namespace Golio.Infrastructure.CacheService
 
                 if (string.IsNullOrWhiteSpace(objectString))
                 {
-                    Console.WriteLine($"Key {key} não existe em Cache");
+                    Console.WriteLine($"Key {key} do not exist in Cache");
                     return default;
                 }
 
-                Console.WriteLine($"Key {key} buscada em Cache");
+                Console.WriteLine($"Key {key} from Cache");
                 return JsonSerializer.Deserialize<T>(objectString);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao obter valor em Cache: {ex.Message}");
+                Console.WriteLine($"Error retrieving value from Cache: {ex.Message}");
                 return default;
             }
         }
@@ -54,11 +54,11 @@ namespace Golio.Infrastructure.CacheService
 
                 var objectString = JsonSerializer.Serialize(data);
                 await _cache.SetStringAsync(key, objectString, memoryCacheEntryOptions);
-                Console.WriteLine($"Registrando key {key} em Cache");
+                Console.WriteLine($"Setting key {key} in Cache");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao setar valor em Cache: {ex.Message}");
+                Console.WriteLine($"Error setting value in Cache: {ex.Message}");
             }
         }
 
@@ -79,11 +79,11 @@ namespace Golio.Infrastructure.CacheService
 
                 var objectString = JsonSerializer.Serialize(products);
                 await _cache.SetStringAsync(defaultQuery, objectString, memoryCacheEntryOptions);
-                Console.WriteLine($"Registrando key {defaultQuery} em Cache");
+                Console.WriteLine($"Setting key {defaultQuery} in Cache");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro ao setar valor em Cache: {ex.Message}");
+                Console.WriteLine($"Error setting value in Cache: {ex.Message}");
             }
         }
     }

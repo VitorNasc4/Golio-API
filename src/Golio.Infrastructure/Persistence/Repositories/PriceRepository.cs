@@ -27,14 +27,14 @@ namespace Golio.Infrastructure.Persistence.Repositories
                 var product = await _productRepository.GetProductByIdAsync(price.ProductId);
                 if (product == null)
                 {
-                    Console.WriteLine("Produto não encontrado");
+                    Console.WriteLine($"Product with ID {price.ProductId} not found");
                     return;
                 }
 
                 var priceAlreadyExist = product.Prices.Any(p => p.StoreId == price.StoreId);
                 if (priceAlreadyExist)
                 {
-                    Console.WriteLine("Preço já registrado");
+                    Console.WriteLine($"Price whit StoreId {price.StoreId} already exists");
                     return;
                 }
 
@@ -57,8 +57,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao registrar preço");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error registering price: {ex.Message}");
             }
         }
 
@@ -75,8 +74,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao consultar preços pelo ID");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error on searching prices by Id {priceId}: {ex.Message}");
                 return null;
             }
         }
@@ -90,8 +88,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao consultar salvar alterações de preço");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error saving price changes: {ex.Message}");
             }
         }
 
@@ -102,10 +99,16 @@ namespace Golio.Infrastructure.Persistence.Repositories
 
             if (price == null)
             {
-                Console.WriteLine("Price não encontrada");
+                Console.WriteLine($"Price with ID {updatedPrice.Id} not found");
                 return;
             }
 
+            foreach (var suggestion in price.Suggestions)
+            {
+                _dbContext.Suggestions.Remove(suggestion);
+            }
+
+            price.Suggestions = new List<Suggestion>();
             price.Value = updatedPrice.Value;
 
             await _dbContext.SaveChangesAsync();

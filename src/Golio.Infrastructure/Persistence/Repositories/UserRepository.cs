@@ -30,8 +30,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao salvar usuário");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error saving user: {ex.Message}");
             }
         }
 
@@ -44,8 +43,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao buscar usuário por email e senha");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error searching user by email and password: {ex.Message}");
                 return null;
             }
         }
@@ -58,8 +56,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao buscar usuário por email");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error searching user by email {email}: {ex.Message}");
                 return null;
             }
         }
@@ -75,8 +72,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao buscar usuário por ID");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error searching user by ID {id}: {ex.Message}");
                 return null;
             }
         }
@@ -89,8 +85,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao consultar salvar alterações de usuário");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error saving user: {ex.Message}");
             }
         }
     }

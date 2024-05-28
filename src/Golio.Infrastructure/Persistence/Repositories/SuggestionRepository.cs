@@ -23,6 +23,13 @@ namespace Golio.Infrastructure.Persistence.Repositories
         {
             try
             {
+                var existingSuggestion = await GetSuggestionByIdAsync(suggestion.Id);
+                if (existingSuggestion != null)
+                {
+                    Console.WriteLine("A suggestion with this ID already exists.");
+                    return;
+                }
+
                 var price = await _priceRepository.GetPriceByIdAsync(suggestion.PriceId);
 
                 if (price.Suggestions is null)
@@ -30,14 +37,14 @@ namespace Golio.Infrastructure.Persistence.Repositories
                     price.Suggestions = new List<Suggestion>();
                 }
 
-                price.Suggestions.Add(suggestion);
+                _dbContext.Entry(suggestion).State = EntityState.Added;
+                // price.Suggestions.Add(suggestion);
 
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao adicionar sugestão");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error saving suggestion: {ex.Message}");
             }
         }
 
@@ -48,6 +55,26 @@ namespace Golio.Infrastructure.Persistence.Repositories
                     s.PriceId == suggestion.PriceId &&
                     s.Value == suggestion.Value
                 );
+        }
+
+        public async Task DeleteSuggestionAsync(int suggestionsId)
+        {
+            var suggestion = await GetSuggestionByIdAsync(suggestionsId);
+            if (suggestion != null)
+            {
+                try
+                {
+                    _dbContext.Suggestions.Remove(suggestion);
+                    var entry = _dbContext.Entry(suggestion);
+                    var entriesBefore = _dbContext.ChangeTracker.Entries().ToList();
+                    await _dbContext.SaveChangesAsync();
+                    var entriesAfter = _dbContext.ChangeTracker.Entries().ToList();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+            }
         }
 
         public async Task<Suggestion> GetSuggestionByIdAsync(int suggestionsId)
@@ -61,8 +88,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao consultar sugestão pelo ID");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error searching suggestion by ID {suggestionsId}: {ex.Message}");
                 return null;
             }
         }
@@ -75,8 +101,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao salvar a sugestão");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error saving suggestion: {ex.Message}");
             }
         }
     }

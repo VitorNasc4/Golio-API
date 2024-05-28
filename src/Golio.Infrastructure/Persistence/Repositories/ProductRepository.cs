@@ -44,8 +44,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao adicionar produto");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error adding product: {ex.Message}");
             }
         }
 
@@ -64,8 +63,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao buscar produtos por ID");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error when searching for product by ID {id}: {ex.Message}");
                 return null;
             }
         }
@@ -99,8 +97,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao buscar produtos por query");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error when searching for products by query: {ex.Message}");
                 return null;
             }
         }
@@ -113,7 +110,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao consultar salvar alterações de produto");
+                Console.WriteLine("Error saving product");
                 Console.WriteLine(ex.Message);
             }
         }
@@ -126,7 +123,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
 
             if (product == null)
             {
-                Console.WriteLine("Produto não encontrada");
+                Console.WriteLine($"Product with ID {updatedProduct.Id} not found");
                 return;
             }
 

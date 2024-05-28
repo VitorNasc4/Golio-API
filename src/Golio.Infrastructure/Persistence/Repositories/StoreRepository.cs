@@ -26,8 +26,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao registrar loja");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error adding product: {ex.Message}");
             }
         }
 
@@ -42,8 +41,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao consultar loja pelo ID");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error searching store by ID {storeId}: {ex.Message}");
                 return null;
             }
         }
@@ -59,8 +57,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao consultar loja pelo ID");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error searching store by name {storeName}: {ex.Message}");
                 return null;
             }
         }
@@ -83,8 +80,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao consultar todas as lojas");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error searching all stores: {ex.Message}");
                 return null;
             }
         }
@@ -97,8 +93,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao salvar loja");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error saving stores: {ex.Message}");
             }
         }
 
@@ -109,7 +104,7 @@ namespace Golio.Infrastructure.Persistence.Repositories
 
             if (store == null)
             {
-                Console.WriteLine("Loja não encontrada");
+                Console.WriteLine($"Store with ID {updatedStore.Id} nor found");
                 return;
             }
 
